@@ -16,6 +16,7 @@
  */
 package org.apache.solr.cuvs;
 
+import com.nvidia.cuvs.lucene.AcceleratedHNSWParams;
 import com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat;
 import java.lang.invoke.MethodHandles;
 import org.apache.lucene.codecs.FilterCodec;
@@ -91,13 +92,18 @@ public class CuVSCodec extends FilterCodec {
                     cuvsHnswM,
                     cuvsHnswEfConstruction);
               }
-              return new Lucene99AcceleratedHNSWVectorsFormat(
-                  cuvsWriterThreads,
-                  cuvsIntGraphDegree,
-                  cuvsGraphDegree,
-                  cuvsHnswLayers,
-                  cuvsHnswM,
-                  cuvsHnswEfConstruction);
+              // CUSTOM makes cuVS use the configured graph degrees instead of deriving its own.
+              AcceleratedHNSWParams params =
+                  new AcceleratedHNSWParams.Builder()
+                      .withStrategy(AcceleratedHNSWParams.Strategy.CUSTOM)
+                      .withWriterThreads(cuvsWriterThreads)
+                      .withIntermediateGraphDegree(cuvsIntGraphDegree)
+                      .withGraphDegree(cuvsGraphDegree)
+                      .withHNSWLayer(cuvsHnswLayers)
+                      .withMaxConn(cuvsHnswM)
+                      .withBeamWidth(cuvsHnswEfConstruction)
+                      .build();
+              return new Lucene99AcceleratedHNSWVectorsFormat(params);
             } else if (DenseVectorField.HNSW_ALGORITHM.equals(knnAlgorithm)) {
               return fallbackCodec.getKnnVectorsFormatForField(field);
             } else {

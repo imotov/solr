@@ -16,7 +16,7 @@
  */
 package org.apache.solr.cuvs;
 
-import com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat;
+import com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider;
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.nio.file.Files;
@@ -68,7 +68,7 @@ public class TestCuVSCodecSupportIT extends SolrTestCaseJ4 {
 
   @BeforeClass
   public static void beforeClass() throws Exception {
-    assumeTrue("Skipping cuvs tests", Lucene99AcceleratedHNSWVectorsFormat.supported());
+    assumeTrue("Skipping cuvs tests", ThreadLocalCuVSResourcesProvider.isSupported());
     Path tmpSolrHome = createTempDir();
     Path tmpConfDir = FilterPath.unwrap(tmpSolrHome.resolve(CONF_DIR));
     Path testHomeConfDir = TEST_HOME().resolve(CONF_DIR);
@@ -91,7 +91,7 @@ public class TestCuVSCodecSupportIT extends SolrTestCaseJ4 {
         "Unexpected solrconfig codec factory",
         "org.apache.solr.cuvs.CuVSCodecFactory",
         codecFactory);
-    assertEquals("Unexpected core codec", "Lucene103", solrCore.getCodec().getName());
+    assertEquals("Unexpected core codec", "Lucene104", solrCore.getCodec().getName());
 
     // Index documents
     for (int i = 0; i < DATASET_SIZE; i++) {

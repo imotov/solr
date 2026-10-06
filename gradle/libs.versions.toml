@@ -74,8 +74,8 @@ codehaus-woodstox = "4.3.0"
 commons-cli = "1.11.0"
 commons-codec = "1.22.1"
 commons-io = "2.22.0"
-cuvs-java = "26.08.1"
-cuvs-lucene = "25.12.0"
+cuvs-java = "26.12.0"
+cuvs-lucene = "26.12.0"
 diffplug-spotless = "8.10.0"
 # @keep Use for dockerfile JRE version
 dockerfile-baseimage-java = "25"
@@ -161,7 +161,6 @@ openjdk-jmh = "1.37"
 opentelemetry = "1.65.0"
 opentelemetry-prometheus = "1.65.0-alpha"
 opentelemetry-runtime-telemetry = "2.31.1-alpha"
-oshai-logging = "8.0.4"
 # @keep for version alignment
 ow2-asm = "9.10.1"
 owasp-dependencycheck = "13.0.0"
@@ -286,7 +285,7 @@ commonscli-commonscli = { module = "commons-cli:commons-cli", version.ref = "com
 commonscodec-commonscodec = { module = "commons-codec:commons-codec", version.ref = "commons-codec" }
 commonsio-commonsio = { module = "commons-io:commons-io", version.ref = "commons-io" }
 cuvs-java = { module = "com.nvidia.cuvs:cuvs-java", version.ref = "cuvs-java" }
-cuvs-lucene = { module = "com.nvidia.cuvs.lucene:cuvs-lucene", version.ref = "cuvs-lucene" }
+cuvs-lucene = { module = "com.nvidia.cuvs.lucene:cuvs-lucene-10.4", version.ref = "cuvs-lucene" }
 dropwizard-metrics-core = { module = "io.dropwizard.metrics:metrics-core", version.ref = "dropwizard-metrics" }
 eclipse-jdt-ecj = { module = "org.eclipse.jdt:ecj", version.ref = "eclipse-ecj" }
 eclipse-jetty-alpnjavaclient = { module = "org.eclipse.jetty:jetty-alpn-java-client", version.ref = "eclipse-jetty" }

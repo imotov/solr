@@ -39,4 +39,15 @@ repositories {
     mavenCentral()
     gradlePluginPortal()
   }
+
+  // Unreleased cuVS development builds, installed locally with `mvn install`.
+  exclusiveContent {
+    forRepository {
+      mavenLocal()
+    }
+    filter {
+      includeGroup "com.nvidia.cuvs"
+      includeGroup "com.nvidia.cuvs.lucene"
+    }
+  }
 }
